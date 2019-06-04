@@ -1,0 +1,30 @@
+.Elections .title {
+  text-align: center;
+  text-decoration: underline;
+}
+
+.Elections .time .key {
+  float:left;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.Elections .time .value {
+  float:left;
+  margin-right: 10px;
+}
+
+.Elections .constituency .key {
+  float:left;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.Elections .constituency .value {
+  float:left;
+  margin-right: 10px;
+}
+
+.Elections .candidates {
+margin-top: 20px;
+}

@@ -1,0 +1,10 @@
+@media all and (min-width: 480px) {
+  .IssueDevice {
+    padding: 60px 0;
+  }
+
+  .IssueDevice form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+}

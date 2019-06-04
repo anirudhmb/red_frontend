@@ -1,22 +1,22 @@
 import React, { Component } from "react";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
-import "./Login.css";
+import "./IssueDevice.css";
 import axios from 'axios';
 
-export default class Login extends Component {
+export default class IssueDevice extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       isLoading: false,
-      email: "",
-      password: ""
+      adhaar_card_number: "",
+      device_id: ""
     };
   }
 
   validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
+    return this.state.adhaar_card_number > 0 && this.state.device_id.length > 0;
   }
 
   handleChange = event => {
@@ -30,38 +30,34 @@ export default class Login extends Component {
 
     this.setState({ isLoading: true });
 
-    axios.post('http://user-red-server.herokuapp.com/user/signin', {"mail":this.state.email, "pwd":this.state.password})
+    axios.post('http://user-red-server.herokuapp.com/user/alloc', {"adhaar":this.state.adhaar_card_number, "device_id":this.state.device_id})
          .then((response) => {
            console.log(response);
-           this.props.userHasAuthenticated(true);
-           localStorage.setItem('isLoggedIn', true);
            this.props.history.push("/");
          })
          .catch(function (error){
            alert(error);
          });
-    console.log(this.state.email+"   "+this.state.password);
+    console.log(this.state.adhaar_card_number+"   "+this.state.device_id);
   }
 
   render() {
     return (
-      <div className="Login">
+      <div className="IssueDevice">
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
-            <ControlLabel>Email</ControlLabel>
+          <FormGroup controlId="adhaar_card_number" bsSize="large">
+            <ControlLabel>Adhaar Card Number</ControlLabel>
             <FormControl
               autoFocus
-              type="email"
-              value={this.state.email}
+              value={this.state.adhaar_card_number}
               onChange={this.handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
-            <ControlLabel>Password</ControlLabel>
+          <FormGroup controlId="device_id" bsSize="large">
+            <ControlLabel>Device Id</ControlLabel>
             <FormControl
-              value={this.state.password}
+              value={this.state.device_id}
               onChange={this.handleChange}
-              type="password"
             />
           </FormGroup>
           <LoaderButton
@@ -70,8 +66,8 @@ export default class Login extends Component {
             disabled={!this.validateForm()}
             type="submit"
             isLoading={this.state.isLoading}
-            text="Login"
-            loadingText="Logging in…"
+            text="Issue New Device"
+            loadingText="Issuing…"
           />
         </form>
       </div>
