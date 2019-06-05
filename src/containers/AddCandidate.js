@@ -84,7 +84,7 @@ export default class AddCandidate extends Component {
           </FormGroup>
           {this.state.isValid &&
             <div>
-              <FormGroup controlId="adhaar_card_number" bsSize="large">
+              <FormGroup controlId="name" bsSize="large">
                 <ControlLabel>Name</ControlLabel>
                 <FormControl
                   disabled
@@ -96,7 +96,11 @@ export default class AddCandidate extends Component {
                 <FormControl
                   value={this.state.party_name}
                   onChange={this.handleChange}
-                />
+                  componentClass="select">
+                  <option key="BJP">BJP</option>
+                  <option key="Congress">Congress</option>
+                  <option key="Independent">Independent</option>
+                </FormControl>
               </FormGroup>
               <FormGroup controlId="party_symbol" bsSize="large">
                 <ControlLabel>Party Symbol</ControlLabel>
