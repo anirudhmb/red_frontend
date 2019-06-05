@@ -4,6 +4,9 @@ import { LinkContainer } from "react-router-bootstrap";
 import axios from 'axios';
 import "./Home.css";
 
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import "react-tabs/style/react-tabs.css";
+
 export default class Home extends Component {
 
   constructor(props) {
@@ -38,6 +41,7 @@ export default class Home extends Component {
              this.setState({elections : sortResult});
 
              var result = sortResult.filter(function(a){
+               console.log(new Date(a.start_time).getMinutes());
                return (new Date(a.start_time).getTime() > new Date().getTime());
              });
              this.setState({upcoming : result});
@@ -96,23 +100,39 @@ export default class Home extends Component {
     return (
       <div className="elections">
         <PageHeader>Elections List</PageHeader>
-        <ListGroup>
-          {<h2>Upcoming</h2>}
-          {!this.state.isLoading && this.renderElectionsList(this.state.upcoming)}
-        </ListGroup>
-        <br />
-        {<h2>Ongoing</h2>}
-        <ListGroup>
-          {!this.state.isLoading && this.renderElectionsList(this.state.onGoing)}
-        </ListGroup>
-        <br />
-        {<h2>Past</h2>}
-        <ListGroup>
-          {!this.state.isLoading && this.renderElectionsList(this.state.past)}
-        </ListGroup>
+        <Tabs>
+
+          <TabList>
+            <Tab>Upcoming</Tab>
+            <Tab>OnGoing</Tab>
+            <Tab>Past</Tab>
+          </TabList>
+
+          <TabPanel>
+            <ListGroup>
+              {!this.state.isLoading && this.renderElectionsList(this.state.upcoming)}
+            </ListGroup>
+          </TabPanel>
+
+          <TabPanel>
+            <ListGroup>
+              {!this.state.isLoading && this.renderElectionsList(this.state.onGoing)}
+            </ListGroup>
+          </TabPanel>
+
+          <TabPanel>
+            <ListGroup>
+              {!this.state.isLoading && this.renderElectionsList(this.state.past)}
+            </ListGroup>
+          </TabPanel>
+
+        </Tabs>
       </div>
     );
   }
+
+
+  //Actual render
 
   render() {
     return (
@@ -121,4 +141,26 @@ export default class Home extends Component {
       </div>
     );
   }
+
+
+// render(){
+//   return (
+//     <div className="Home">
+//       <Tabs>
+//       <TabList>
+//         <Tab>Upcoming</Tab>
+//         <Tab>Title 2</Tab>
+//       </TabList>
+//
+//       <TabPanel>
+//         <h2>Any content 1</h2>
+//       </TabPanel>
+//       <TabPanel>
+//         <h2>Any content 2</h2>
+//       </TabPanel>
+//     </Tabs>
+//   </div>
+//   );
+// }
+
 }
